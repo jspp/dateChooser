@@ -29,7 +29,7 @@ public class WindowCalendar extends JFrame implements ActionListener{
 
         // 标签及文本显示
         JPanel pNorth = new JPanel();
-        pNorth.add(new JLabel("请输入年分和月份:"));
+        pNorth.add(new JLabel("请输入年份: "));
         pNorth.add(year);
         pNorth.add(new JLabel("年 "));
         pNorth.add(jComboBox_month);
