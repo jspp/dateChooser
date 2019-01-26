@@ -9,7 +9,8 @@ public class WindowCalendar extends JFrame implements ActionListener{
     JTable table;
     CalendarBean calendar;
     JButton controlButton;
-    JTextField year,month; // 可编辑区域年,月
+    JTextField year; // 可编辑区域年,月
+    private JComboBox jComboBox_month;
     Object[] name = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"}; // 为了表格中的列名使用
     Object[][] rili; // 二维数组日历
 
@@ -23,14 +24,15 @@ public class WindowCalendar extends JFrame implements ActionListener{
 
     void init(){
         year = new JTextField(8);
-        month = new JTextField(2);
+        Integer [] months = {1, 2, 3,4,5,6,7,8,9,10,11,12};
+        jComboBox_month = new JComboBox(months);
 
         // 标签及文本显示
         JPanel pNorth = new JPanel();
         pNorth.add(new JLabel("请输入年分和月份:"));
         pNorth.add(year);
         pNorth.add(new JLabel("年 "));
-        pNorth.add(month);
+        pNorth.add(jComboBox_month);
         pNorth.add(new JLabel("月   "));
         add(pNorth,BorderLayout.NORTH);
 
@@ -50,7 +52,7 @@ public class WindowCalendar extends JFrame implements ActionListener{
         // 对输入进行容错处理,并对正确输入输出相应年月表格日历
         try{ // 控制年份和月份都为整数,且有范围限制,年份(-2^31~2^31-1)
             inputYear = Integer.parseInt(year.getText().trim());
-            inputMonth = Integer.parseInt(month.getText().trim());
+            inputMonth = Integer.parseInt(jComboBox_month.getSelectedItem().toString());
 
             if(inputMonth>=1 && inputMonth<=12){ // 控制月份为整数(1~12)
                 calendar.setYear(inputYear);
