@@ -1,6 +1,7 @@
 package com.exam02;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,19 +12,20 @@ public class WindowCalendar extends JFrame implements ActionListener{
     JButton controlButton;
     JTextField year; // 可编辑区域年,月
     private JComboBox jComboBox_month;
-    Object[] name = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"}; // 为了表格中的列名使用
-    Object[][] rili; // 二维数组日历
+    String[] name = {"星期日","星期一","星期二","星期三","星期四","星期五","星期六"}; // 为了表格中的列名使用
+    String[][] rili; // 二维数组日历
 
     WindowCalendar(){ // 构造函数,用于初始化
         init();
-        setSize(580,260);
+        setSize(580,310);
         setVisible(true);
-        this.setLocation(480, 180);
+        this.setLocation(480, 220);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     void init(){
         year = new JTextField(8);
+        year.setText("2019");
         Integer [] months = {1, 2, 3,4,5,6,7,8,9,10,11,12};
         jComboBox_month = new JComboBox(months);
 
@@ -59,6 +61,13 @@ public class WindowCalendar extends JFrame implements ActionListener{
                 calendar.setMonth(inputMonth);
                 rili = calendar.getCalendar();
                 table = new JTable(rili,name);
+                // 内如居中
+                DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+                renderer.setHorizontalAlignment(JLabel.CENTER);
+                renderer.setVerticalAlignment(SwingConstants.BOTTOM);
+                table.setDefaultRenderer(Object.class,renderer);
+                // 设置行高
+                table.setRowHeight(30);
                 add(new JScrollPane(table));
                 validate();
             }else{
